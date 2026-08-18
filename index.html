@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAKOCHI Official - Premium Game & Digital TopUp</title>
+    <title>MAKOCHI Official - Premium Game TopUp</title>
     
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,6 @@
             --bg-surface: #121824;
             --bg-card: #182030;
             --bg-input: #0f1420;
-            --bg-glass: rgba(24, 32, 48, 0.75);
             
             --primary: #f3ba2f;
             --primary-hover: #e0a71b;
@@ -75,6 +74,27 @@
         }
 
         a { text-decoration: none; color: inherit; }
+
+        /* --- KEYFRAME ANIMATION FADE-IN & FADE-OUT --- */
+        @keyframes backdropFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes backdropFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes modalScaleIn {
+            from { opacity: 0; transform: scale(0.90) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes modalScaleOut {
+            from { opacity: 1; transform: scale(1) translateY(0); }
+            to { opacity: 0; transform: scale(0.90) translateY(10px); }
+        }
 
         /* --- HEADER NAVBAR --- */
         .header {
@@ -242,14 +262,12 @@
             gap: 8px;
         }
 
-        .section-title i {
-            color: var(--primary);
-        }
+        .section-title i { color: var(--primary); }
 
         /* --- GAME SELECTOR --- */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 24px;
         }
@@ -258,7 +276,7 @@
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 10px 6px;
+            padding: 12px 8px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
@@ -289,8 +307,8 @@
         }
 
         .game-name {
-            font-size: 0.72rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             color: var(--text-main);
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -298,7 +316,7 @@
             overflow: hidden;
         }
 
-        /* --- FORM CARDS --- */
+        /* --- STEP CARDS --- */
         .step-card {
             background: var(--bg-surface);
             border: 1px solid var(--border);
@@ -335,16 +353,46 @@
             font-weight: 700;
         }
 
-        /* Input Controls */
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        /* --- PROFESSIONAL INPUT CONTROLS --- */
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            transition: var(--transition);
         }
 
-        .input-row {
+        .input-grid.has-zone {
+            grid-template-columns: 1.4fr 1fr;
+        }
+
+        .input-group {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            letter-spacing: 0.5px;
+            margin-left: 2px;
+            text-transform: uppercase;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            pointer-events: none;
+            transition: var(--transition);
         }
 
         .form-control {
@@ -352,10 +400,10 @@
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 12px 14px;
+            padding: 12px 14px 12px 40px;
             color: var(--text-main);
             font-size: 0.88rem;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
         }
 
@@ -363,10 +411,12 @@
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px var(--primary-glow);
+            background: rgba(24, 32, 48, 0.9);
         }
 
-        #player-id { flex: 2; }
-        #ml-zone-wrap { flex: 1; display: none; }
+        .input-wrapper:focus-within .input-icon {
+            color: var(--primary);
+        }
 
         /* Items Selector Grid */
         .items-grid {
@@ -390,9 +440,7 @@
             min-height: 75px;
         }
 
-        .item-card:hover {
-            border-color: rgba(243, 186, 47, 0.4);
-        }
+        .item-card:hover { border-color: rgba(243, 186, 47, 0.4); }
 
         .item-card.active {
             background: rgba(243, 186, 47, 0.08);
@@ -426,7 +474,7 @@
             color: var(--primary);
         }
 
-        /* Vouchers / Special Cards */
+        /* Vouchers Grid */
         .voucher-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -454,9 +502,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .voucher-body {
-            padding: 8px 10px;
-        }
+        .voucher-body { padding: 8px 10px; }
 
         .voucher-title {
             font-size: 0.75rem;
@@ -504,7 +550,7 @@
             font-size: 0.9rem;
         }
 
-        /* --- CHECKOUT BAR & BUTTON --- */
+        /* --- CHECKOUT BUTTON --- */
         .btn-submit {
             width: 100%;
             background: linear-gradient(135deg, var(--primary) 0%, #d49a17 100%);
@@ -527,6 +573,8 @@
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(243, 186, 47, 0.35);
         }
+
+        .btn-submit:active { transform: scale(0.98); }
 
         /* --- BOTTOM NAV BAR --- */
         .bottom-nav {
@@ -557,9 +605,7 @@
 
         .nav-link i { font-size: 1.15rem; }
 
-        .nav-link.active, .nav-link:hover {
-            color: var(--primary);
-        }
+        .nav-link.active, .nav-link:hover { color: var(--primary); }
 
         /* --- FLOATING AUDIO WIDGET --- */
         .audio-widget {
@@ -585,25 +631,35 @@
         .audio-icon { color: var(--primary); font-size: 0.85rem; }
         .audio-text { font-size: 0.7rem; font-weight: 700; color: var(--text-main); }
 
-        /* --- MODAL SYSTEM --- */
+        /* --- MODAL SYSTEM WITH FADE-IN & FADE-OUT --- */
         .modal-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(5, 7, 12, 0.8);
-            backdrop-filter: blur(6px);
-            display: flex;
+            background: rgba(5, 7, 12, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition);
             padding: 16px;
         }
 
-        .modal-backdrop.active {
-            opacity: 1;
-            pointer-events: auto;
+        .modal-backdrop.show {
+            display: flex;
+            animation: backdropFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .modal-backdrop.show .modal-card {
+            animation: modalScaleIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .modal-backdrop.closing {
+            animation: backdropFadeOut 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .modal-backdrop.closing .modal-card {
+            animation: modalScaleOut 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         .modal-card {
@@ -613,13 +669,7 @@
             width: 100%;
             max-width: 420px;
             padding: 24px;
-            transform: scale(0.92);
-            transition: var(--transition);
             box-shadow: var(--shadow-card);
-        }
-
-        .modal-backdrop.active .modal-card {
-            transform: scale(1);
         }
 
         .modal-header {
@@ -671,10 +721,7 @@
         .qris-img { width: 150px; height: 150px; object-fit: contain; }
         .qris-caption { font-size: 0.68rem; color: #333; font-weight: 700; margin-top: 4px; }
 
-        .modal-btns {
-            display: flex;
-            gap: 10px;
-        }
+        .modal-btns { display: flex; gap: 10px; }
 
         .btn-secondary {
             flex: 1;
@@ -686,7 +733,10 @@
             font-weight: 700;
             font-size: 0.85rem;
             cursor: pointer;
+            transition: var(--transition);
         }
+
+        .btn-secondary:hover { color: var(--text-main); border-color: rgba(255,255,255,0.2); }
 
         .btn-wa {
             flex: 1.5;
@@ -702,9 +752,12 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            transition: var(--transition);
         }
 
-        /* --- NOTICE LIST --- */
+        .btn-wa:hover { background: #20bd5a; }
+
+        /* Notice List */
         .notice-feed {
             display: flex;
             flex-direction: column;
@@ -737,7 +790,7 @@
             line-height: 1.4;
         }
 
-        /* --- TOAST NOTIFICATION --- */
+        /* --- TOAST ALERT --- */
         .toast {
             position: fixed;
             top: 20px;
@@ -758,11 +811,8 @@
             gap: 8px;
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
 
-        /* Utility */
         .hidden { display: none !important; }
     </style>
 </head>
@@ -785,7 +835,7 @@
             </div>
         </div>
         <div class="header-actions">
-            <div class="icon-btn" onclick="openNoticeModal()" title="Pengumuman">
+            <div class="icon-btn" onclick="openModal('modal-notice')" title="Pengumuman">
                 <i class="fa-solid fa-bell"></i>
                 <span class="badge-dot" id="unread-dot"></span>
             </div>
@@ -819,7 +869,7 @@
 
     <!-- 1. SELECT GAME CATEGORY -->
     <div class="section-header">
-        <div class="section-title"><i class="fa-solid fa-layer-group"></i> Pilih Kategori Layanannya</div>
+        <div class="section-title"><i class="fa-solid fa-layer-group"></i> Pilih Game</div>
     </div>
 
     <div class="game-grid">
@@ -829,15 +879,7 @@
         </div>
         <div class="game-card" onclick="selectGame(this, 'Mobile Legends', 'ml.jpeg', 'User ID')">
             <img src="ml.jpeg" alt="Mobile Legends" class="game-thumb" onerror="this.src='https://placehold.co/100x100/0f1420/f3ba2f?text=MLBB'">
-            <span class="game-name">MLBB</span>
-        </div>
-        <div class="game-card" onclick="selectGame(this, 'Token Listrik', 'pln.png', 'ID Pelanggan / Meter')">
-            <img src="pln.png" alt="PLN Listrik" class="game-thumb" onerror="this.src='https://placehold.co/100x100/0f1420/f3ba2f?text=PLN'">
-            <span class="game-name">Listrik PLN</span>
-        </div>
-        <div class="game-card" onclick="selectGame(this, 'Pulsa Reguler', 'internet.jpg', 'Nomor HP Target')">
-            <img src="internet.jpg" alt="Pulsa HP" class="game-thumb" onerror="this.src='https://placehold.co/100x100/0f1420/f3ba2f?text=Pulsa'">
-            <span class="game-name">Pulsa HP</span>
+            <span class="game-name">Mobile Legends</span>
         </div>
     </div>
 
@@ -847,11 +889,21 @@
             <div class="step-num">1</div>
             <div class="step-title" id="form-step-title">Lengkapi Data Akun Free Fire</div>
         </div>
-        <div class="form-group">
-            <div class="input-row">
-                <input type="text" id="player-id" class="form-control" placeholder="Masukkan ID Game" autocomplete="off">
-                <div id="ml-zone-wrap">
-                    <input type="text" id="player-zone" class="form-control" placeholder="Zone ID" maxlength="6">
+        
+        <div class="input-grid" id="input-grid">
+            <div class="input-group">
+                <label class="input-label" id="label-player-id">Player ID</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="player-id" class="form-control" placeholder="Masukkan Player ID" autocomplete="off">
+                </div>
+            </div>
+            
+            <div class="input-group hidden" id="ml-zone-wrap">
+                <label class="input-label">Zone ID</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-server input-icon"></i>
+                    <input type="text" id="player-zone" class="form-control" placeholder="1234" maxlength="6" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -896,7 +948,7 @@
     </button>
 </main>
 
-<!-- MODAL: CHECKOUT CONFIRMATION -->
+<!-- MODAL: CHECKOUT CONFIRMATION (WITH FADE IN/OUT) -->
 <div id="modal-checkout" class="modal-backdrop">
     <div class="modal-card">
         <div class="modal-header">
@@ -941,7 +993,7 @@
     </div>
 </div>
 
-<!-- MODAL: SYSTEM NOTICE -->
+<!-- MODAL: SYSTEM NOTICE (WITH FADE IN/OUT) -->
 <div id="modal-notice" class="modal-backdrop">
     <div class="modal-card">
         <div class="modal-header">
@@ -967,7 +1019,7 @@
     </div>
 </div>
 
-<!-- JAVASCRIPT SYSTEM LOGIC -->
+<!-- JAVASCRIPT LOGIC -->
 <script>
     // CONFIGURATION & DATABASE
     const WA_ADMIN_NUMBER = "6289513623197";
@@ -1002,23 +1054,6 @@
             special: [
                 { id: 'ml_wdp', name: 'Weekly Diamond Pass', price: 28000, img: 'ml.png' }
             ]
-        },
-        'Token Listrik': {
-            nominal: [
-                { id: 'pln_20', name: 'Token PLN 20.000', price: 21500 },
-                { id: 'pln_50', name: 'Token PLN 50.000', price: 51500 },
-                { id: 'pln_100', name: 'Token PLN 100.000', price: 101500 }
-            ],
-            special: []
-        },
-        'Pulsa Reguler': {
-            nominal: [
-                { id: 'pls_5', name: 'Pulsa 5.000', price: 7000 },
-                { id: 'pls_10', name: 'Pulsa 10.000', price: 12000 },
-                { id: 'pls_20', name: 'Pulsa 20.000', price: 22000 },
-                { id: 'pls_50', name: 'Pulsa 50.000', price: 51500 }
-            ],
-            special: []
         }
     };
 
@@ -1032,7 +1067,7 @@
 
     let audioPlaying = false;
 
-    // INIT
+    // INITIALIZATION
     document.addEventListener('DOMContentLoaded', () => {
         renderCatalog('Free Fire');
     });
@@ -1048,12 +1083,21 @@
 
         document.getElementById('banner-img').src = bannerImage;
         document.getElementById('form-step-title').innerText = `Lengkapi Data Akun ${gameName}`;
+        document.getElementById('label-player-id').innerText = inputLabelText;
         document.getElementById('player-id').placeholder = `Masukkan ${inputLabelText}`;
         document.getElementById('player-id').value = '';
         document.getElementById('player-zone').value = '';
 
+        const inputGrid = document.getElementById('input-grid');
         const mlZoneWrap = document.getElementById('ml-zone-wrap');
-        mlZoneWrap.style.display = (gameName === 'Mobile Legends') ? 'block' : 'none';
+
+        if (gameName === 'Mobile Legends') {
+            inputGrid.classList.add('has-zone');
+            mlZoneWrap.classList.remove('hidden');
+        } else {
+            inputGrid.classList.remove('has-zone');
+            mlZoneWrap.classList.add('hidden');
+        }
 
         renderCatalog(gameName);
     }
@@ -1071,7 +1115,7 @@
         const catalog = DATABASE_GAME[gameName];
         if (!catalog) return;
 
-        // Render Standard Nominals
+        // Render Nominals
         if (catalog.nominal && catalog.nominal.length > 0) {
             nomCard.classList.remove('hidden');
             catalog.nominal.forEach(item => {
@@ -1091,7 +1135,7 @@
             nomCard.classList.add('hidden');
         }
 
-        // Render Specials/Membership
+        // Render Special
         if (catalog.special && catalog.special.length > 0) {
             specCard.classList.remove('hidden');
             catalog.special.forEach(item => {
@@ -1139,7 +1183,7 @@
         const playerZone = document.getElementById('player-zone').value.trim();
 
         if (!playerId) {
-            showToast("Harap isi ID Tujuan / Nomor Pelanggan.");
+            showToast("Harap isi ID Tujuan.");
             return;
         }
 
@@ -1153,7 +1197,6 @@
             return;
         }
 
-        // Set Invoice Modal Data
         document.getElementById('inv-game').innerText = currentState.game;
         
         let formattedId = playerId;
@@ -1170,7 +1213,7 @@
         openModal('modal-checkout');
     }
 
-    // WHATSAPP CHECKOUT GENERATOR
+    // WHATSAPP REDIRECT
     function sendToWhatsApp() {
         const playerId = document.getElementById('player-id').value.trim();
         const playerZone = document.getElementById('player-zone').value.trim();
@@ -1199,21 +1242,28 @@ _Halo Min, mohon konfirmasi pesanan ini. Terima kasih!_`;
         closeModal('modal-checkout');
     }
 
-    // MODAL CONTROL
+    // MODAL CONTROL WITH SMOOTH FADE-IN & FADE-OUT
     function openModal(modalId) {
-        document.getElementById(modalId).classList.add('active');
+        const modal = document.getElementById(modalId);
+        modal.classList.remove('closing');
+        modal.classList.add('show');
+
+        if (modalId === 'modal-notice') {
+            document.getElementById('unread-dot').style.display = 'none';
+        }
     }
 
     function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('active');
+        const modal = document.getElementById(modalId);
+        modal.classList.add('closing');
+        
+        // Memainkan animasi Fade-Out selama 250ms sebelum menghilangkan modal
+        setTimeout(() => {
+            modal.classList.remove('show', 'closing');
+        }, 250);
     }
 
-    function openNoticeModal() {
-        openModal('modal-notice');
-        document.getElementById('unread-dot').style.display = 'none';
-    }
-
-    // TOAST NOTIFICATION SYSTEM
+    // TOAST SYSTEM
     function showToast(message) {
         const toast = document.getElementById('toast-msg');
         document.getElementById('toast-text').innerText = message;
@@ -1223,7 +1273,7 @@ _Halo Min, mohon konfirmasi pesanan ini. Terima kasih!_`;
         }, 3000);
     }
 
-    // AUDIO PLAYER
+    // AUDIO CONTROL
     function toggleAudio() {
         const player = document.getElementById('audio-player');
         const widget = document.getElementById('audio-widget');
