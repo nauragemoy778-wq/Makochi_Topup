@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAKOCHI Official - Premium Game & Digital TopUp</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- DESIGN SYSTEM & VARIABLES --- */
+        :root {
+            --bg-body: #0a0d14;
+            --bg-surface: #121824;
+            --bg-card: #182030;
+            --bg-input: #0f1420;
+            --bg-glass: rgba(24, 32, 48, 0.75);
+            
+            --primary: #f3ba2f;
+            --primary-hover: #e0a71b;
+            --primary-glow: rgba(243, 186, 47, 0.18);
+            
+            --success: #10b981;
+            --danger: #ef4444;
+            --info: #3b82f6;
+
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --text-muted: #64748b;
+            
+            --border: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(243, 186, 47, 0.6);
+            
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px var(--primary-glow);
+            
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 90px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(243, 186, 47, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- HEADER NAVBAR --- */
+        .header {
+            background: rgba(10, 13, 20, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 14px 0;
+        }
+
+        .header-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .brand-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .brand-title span { color: var(--primary); }
+        
+        .verified-badge {
+            color: var(--info);
+            font-size: 0.85rem;
+        }
+
+        .brand-subtitle {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            color: var(--primary);
+            border-color: var(--border-active);
+        }
+
+        .badge-dot {
+            position: absolute;
+            top: 9px;
+            right: 9px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--danger);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--danger);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(0.95); opacity: 1; }
+        }
+
+        /* --- HERO BANNER --- */
+        .hero-banner {
+            margin: 20px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            background: var(--bg-surface);
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 20, 0.95) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .banner-tag {
+            background: var(--primary);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- SECTION HEADINGS --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        /* --- GAME SELECTOR --- */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .game-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 10px 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(243, 186, 47, 0.3);
+        }
+
+        .game-card.active {
+            background: rgba(243, 186, 47, 0.05);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .game-thumb {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+
+        .game-name {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* --- FORM CARDS --- */
+        .step-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary-glow);
+            color: var(--primary);
+            border: 1px solid var(--border-active);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        /* Input Controls */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        #player-id { flex: 2; }
+        #ml-zone-wrap { flex: 1; display: none; }
+
+        /* Items Selector Grid */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .item-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 75px;
+        }
+
+        .item-card:hover {
+            border-color: rgba(243, 186, 47, 0.4);
+        }
+
+        .item-card.active {
+            background: rgba(243, 186, 47, 0.08);
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(243, 186, 47, 0.15);
+        }
+
+        .item-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: #000;
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-bottom-left-radius: var(--radius-sm);
+            text-transform: uppercase;
+        }
+
+        .item-title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .item-price {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Vouchers / Special Cards */
+        .voucher-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .voucher-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .voucher-card.active {
+            border-color: var(--primary);
+            background: rgba(243, 186, 47, 0.05);
+        }
+
+        .voucher-img {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .voucher-body {
+            padding: 8px 10px;
+        }
+
+        .voucher-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .voucher-price {
+            font-size: 0.78rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Qty Counter */
+        .qty-control {
+            display: inline-flex;
+            align-items: center;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover { color: var(--text-main); background: var(--border); }
+
+        .qty-field {
+            width: 44px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* --- CHECKOUT BAR & BUTTON --- */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, #d49a17 100%);
+            color: #0a0d14;
+            border: none;
+            padding: 15px;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(243, 186, 47, 0.25);
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(243, 186, 47, 0.35);
+        }
+
+        /* --- BOTTOM NAV BAR --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(18, 24, 36, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 90;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-link i { font-size: 1.15rem; }
+
+        .nav-link.active, .nav-link:hover {
+            color: var(--primary);
+        }
+
+        /* --- FLOATING AUDIO WIDGET --- */
+        .audio-widget {
+            position: fixed;
+            bottom: 75px;
+            right: 16px;
+            z-index: 80;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-card);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .audio-widget:hover { border-color: var(--border-active); }
+        .audio-widget.playing { border-color: var(--primary); background: rgba(243, 186, 47, 0.1); }
+
+        .audio-icon { color: var(--primary); font-size: 0.85rem; }
+        .audio-text { font-size: 0.7rem; font-weight: 700; color: var(--text-main); }
+
+        /* --- MODAL SYSTEM --- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 7, 12, 0.8);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
+            transform: scale(0.92);
+            transition: var(--transition);
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-backdrop.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .invoice-box {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .invoice-row:last-child { border-bottom: none; }
+        .invoice-label { color: var(--text-muted); }
+        .invoice-val { font-weight: 700; color: var(--text-main); text-align: right; }
+        .invoice-total { color: var(--primary); font-size: 1rem; }
+
+        .qris-box {
+            text-align: center;
+            margin-bottom: 20px;
+            background: #fff;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .qris-img { width: 150px; height: 150px; object-fit: contain; }
+        .qris-caption { font-size: 0.68rem; color: #333; font-weight: 700; margin-top: 4px; }
+
+        .modal-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-wa {
+            flex: 1.5;
+            background: #25d366;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* --- NOTICE LIST --- */
+        .notice-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 16px;
+        }
+
+        .notice-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px;
+        }
+
+        .notice-card-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .notice-card-body {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--bg-surface);
+            border: 1px solid var(--danger);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Utility */
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<!-- TOAST ALERT -->
+<div id="toast-msg" class="toast">
+    <i class="fa-solid fa-circle-exclamation" style="color: var(--danger);"></i>
+    <span id="toast-text">Pesan peringatan</span>
+</div>
+
+<!-- HEADER NAVBAR -->
+<header class="header">
+    <div class="container header-wrap">
+        <div class="brand">
+            <img src="anime.png" alt="MAKOCHI Logo" class="brand-logo" onerror="this.src='https://placehold.co/100x100/182030/f3ba2f?text=M'">
+            <div class="brand-info">
+                <div class="brand-title">MAKOCHI<span>.</span> <i class="fa-solid fa-circle-check verified-badge"></i></div>
+                <div class="brand-subtitle">Digital Store</div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="icon-btn" onclick="openNoticeModal()" title="Pengumuman">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge-dot" id="unread-dot"></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+    <a href="#" class="nav-link active"><i class="fa-solid fa-house"></i>Beranda</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-gamepad"></i>Layanan</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-receipt"></i>Riwayat</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-headset"></i>Bantuan</a>
+</nav>
+
+<!-- FLOATING AUDIO CONTROL -->
+<audio id="audio-player" src="lagu.mp3" loop></audio>
+<div id="audio-widget" class="audio-widget" onclick="toggleAudio()">
+    <i id="audio-icon" class="fa-solid fa-music audio-icon"></i>
+    <span id="audio-label" class="audio-text">Musik Off</span>
+</div>
+
+<main class="container">
+    <!-- HERO PROMO BANNER -->
+    <div class="hero-banner">
+        <img id="banner-img" src="ff.png" alt="Promo Banner" class="banner-img" onerror="this.src='https://placehold.co/680x250/182030/64748b?text=MAKOCHI+OFFICIAL+STORE'">
+        <div class="banner-overlay">
+            <span class="banner-tag">Instant 24 Jam</span>
+        </div>
+    </div>
+
+    <!-- 1. SELECT GAME CATEGORY -->
+    <div class="section-header">
+        <div class="section-title"><i class="fa-solid fa-layer-group"></i> Pilih Kategori Layanannya</div>
+    </div>
+
+    <div class="game-grid">
+        <div class="game-card active" onclick="selectGame(this, 'Free Fire', 'ff.png', 'Player ID')">
+            <img src="ff.png" alt="Free Fire" class="game-thumb" onerror="this.src='https://placehold.co/100x100/0f1420/f3ba2f?text=FF'">
+            <span class="game-name">Free Fire</span>
+        </div>
+        <div class="game-card" onclick="selectGame(this, 'Mobile Legends', 'ml.jpeg', 'User ID')">
+            <img src="ml.jpeg" alt="Mobile Legends" class="game-thumb" onerror="this.src='https://placehold.co/100x100/0f1420/f3ba2f?text=MLBB'">
+            <span class="game-name">MLBB</span>
+        </div>
+        <div class="game-card" onclick="selectGame(this, 'Token Listrik', 'pln.png', 'ID Pelanggan / Meter')">
+            <img src="pln.png" alt="PLN Listrik" class="game-thumb" onerror="this.src='https://placehold.co/100x100/0f1420/f3ba2f?text=PLN'">
+            <span class="game-name">Listrik PLN</span>
+        </div>
+        <div class="game-card" onclick="selectGame(this, 'Pulsa Reguler', 'internet.jpg', 'Nomor HP Target')">
+            <img src="internet.jpg" alt="Pulsa HP" class="game-thumb" onerror="this.src='https://placehold.co/100x100/0f1420/f3ba2f?text=Pulsa'">
+            <span class="game-name">Pulsa HP</span>
+        </div>
+    </div>
+
+    <!-- 2. USER ID FORM -->
+    <div class="step-card">
+        <div class="step-header">
+            <div class="step-num">1</div>
+            <div class="step-title" id="form-step-title">Lengkapi Data Akun Free Fire</div>
+        </div>
+        <div class="form-group">
+            <div class="input-row">
+                <input type="text" id="player-id" class="form-control" placeholder="Masukkan ID Game" autocomplete="off">
+                <div id="ml-zone-wrap">
+                    <input type="text" id="player-zone" class="form-control" placeholder="Zone ID" maxlength="6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. PACKAGE NOMINAL SELECTION -->
+    <div class="step-card" id="step-nominal-card">
+        <div class="step-header">
+            <div class="step-num">2</div>
+            <div class="step-title">Pilih Nominal TopUp</div>
+        </div>
+        <div class="items-grid" id="nominal-grid"></div>
+    </div>
+
+    <!-- 4. SPECIAL VOUCHERS -->
+    <div class="step-card" id="step-special-card">
+        <div class="step-header">
+            <div class="step-num"><i class="fa-solid fa-crown" style="font-size:0.75rem;"></i></div>
+            <div class="step-title">Paket Special & Membership</div>
+        </div>
+        <div class="voucher-grid" id="special-grid"></div>
+    </div>
+
+    <!-- 5. QUANTITY & SUBMIT -->
+    <div class="step-card">
+        <div class="step-header" style="justify-content: space-between; margin-bottom: 0;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="step-num">3</div>
+                <div class="step-title">Jumlah Pembelian</div>
+            </div>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="updateQty(-1)"><i class="fa-solid fa-minus"></i></button>
+                <input type="text" id="qty-field" class="qty-field" value="1" readonly>
+                <button class="qty-btn" onclick="updateQty(1)"><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-submit" onclick="submitOrder()">
+        <span>Lanjut Pembayaran</span>
+        <i class="fa-solid fa-shield-halved"></i>
+    </button>
+</main>
+
+<!-- MODAL: CHECKOUT CONFIRMATION -->
+<div id="modal-checkout" class="modal-backdrop">
+    <div class="modal-card">
+        <div class="modal-header">
+            <div class="modal-title"><i class="fa-solid fa-file-invoice" style="color: var(--primary);"></i> Ringkasan Pesanan</div>
+        </div>
+        <div class="invoice-box">
+            <div class="invoice-row">
+                <span class="invoice-label">Layanan</span>
+                <span class="invoice-val" id="inv-game">-</span>
+            </div>
+            <div class="invoice-row">
+                <span class="invoice-label">Tujuan ID</span>
+                <span class="invoice-val" id="inv-target">-</span>
+            </div>
+            <div class="invoice-row">
+                <span class="invoice-label">Item</span>
+                <span class="invoice-val" id="inv-item">-</span>
+            </div>
+            <div class="invoice-row">
+                <span class="invoice-label">Jumlah</span>
+                <span class="invoice-val" id="inv-qty">1</span>
+            </div>
+            <div class="invoice-row">
+                <span class="invoice-label">Pembayaran</span>
+                <span class="invoice-val">QRIS Auto-Detect</span>
+            </div>
+            <div class="invoice-row" style="margin-top: 6px; padding-top: 8px;">
+                <span class="invoice-label" style="font-weight: 700; color: var(--text-main);">Total Pembayaran</span>
+                <span class="invoice-val invoice-total" id="inv-total">Rp 0</span>
+            </div>
+        </div>
+
+        <div class="qris-box">
+            <img src="scan.jpg" alt="Scan QRIS Makochi" class="qris-img" onerror="this.src='https://placehold.co/150x150/ffffff/000000?text=Scan+QRIS'">
+            <div class="qris-caption">Scan QRIS via M-Banking / E-Wallet</div>
+        </div>
+
+        <div class="modal-btns">
+            <button class="btn-secondary" onclick="closeModal('modal-checkout')">Batal</button>
+            <button class="btn-wa" onclick="sendToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Bayar Via WA</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: SYSTEM NOTICE -->
+<div id="modal-notice" class="modal-backdrop">
+    <div class="modal-card">
+        <div class="modal-header">
+            <div class="modal-title"><i class="fa-solid fa-bullhorn" style="color: var(--primary);"></i> Informasi & Pengumuman</div>
+        </div>
+        
+        <div class="notice-feed">
+            <div class="notice-card">
+                <div class="notice-card-header"><i class="fa-solid fa-bolt"></i> Otomatisasi Sistem 24 Jam</div>
+                <div class="notice-card-body">Seluruh transaksi game diproses secara instan oleh server dalam waktu 1-5 detik setelah konfirmasi QRIS diterima.</div>
+            </div>
+            <div class="notice-card">
+                <div class="notice-card-header"><i class="fa-solid fa-percent"></i> Bebas Biaya Layanan</div>
+                <div class="notice-card-body">Dapatkan harga bersih tanpa tambahan biaya admin transaksi dengan menggunakan channel QRIS resmi.</div>
+            </div>
+            <div class="notice-card">
+                <div class="notice-card-header"><i class="fa-solid fa-headset"></i> Layanan Bantuan (CS)</div>
+                <div class="notice-card-body">Apabila mengalami kendala pengisian, tim CS siap membantu Anda melalui WhatsApp Admin.</div>
+            </div>
+        </div>
+
+        <button class="btn-secondary" style="width: 100%;" onclick="closeModal('modal-notice')">Mengerti & Tutup</button>
+    </div>
+</div>
+
+<!-- JAVASCRIPT SYSTEM LOGIC -->
+<script>
+    // CONFIGURATION & DATABASE
+    const WA_ADMIN_NUMBER = "6289513623197";
+
+    const DATABASE_GAME = {
+        'Free Fire': {
+            nominal: [
+                { id: 'ff_5', name: '5 Diamonds', price: 1000, badge: 'Murah' },
+                { id: 'ff_12', name: '12 Diamonds', price: 2000 },
+                { id: 'ff_50', name: '50 Diamonds', price: 8000 },
+                { id: 'ff_70', name: '70 Diamonds', price: 12000, badge: 'Popular' },
+                { id: 'ff_140', name: '140 Diamonds', price: 22000 },
+                { id: 'ff_355', name: '355 Diamonds', price: 50000 },
+                { id: 'ff_720', name: '720 Diamonds', price: 105000, badge: 'Best' },
+                { id: 'ff_1450', name: '1450 Diamonds', price: 197000 }
+            ],
+            special: [
+                { id: 'ff_weekly', name: 'Weekly Membership', price: 32000, img: 'ff1.png' },
+                { id: 'ff_monthly', name: 'Monthly Membership', price: 115000, img: 'ff1.png' },
+                { id: 'ff_bp', name: 'Booyah Pass Pass', price: 45000, img: 'ff1.png' }
+            ]
+        },
+        'Mobile Legends': {
+            nominal: [
+                { id: 'ml_5', name: '5 Diamonds (4+1)', price: 1500 },
+                { id: 'ml_12', name: '12 Diamonds (11+1)', price: 3500 },
+                { id: 'ml_28', name: '28 Diamonds (25+3)', price: 8000 },
+                { id: 'ml_85', name: '85 Diamonds (77+8)', price: 24000, badge: 'Hot' },
+                { id: 'ml_172', name: '172 Diamonds', price: 48000 },
+                { id: 'ml_257', name: '257 Diamonds', price: 72000 }
+            ],
+            special: [
+                { id: 'ml_wdp', name: 'Weekly Diamond Pass', price: 28000, img: 'ml.png' }
+            ]
+        },
+        'Token Listrik': {
+            nominal: [
+                { id: 'pln_20', name: 'Token PLN 20.000', price: 21500 },
+                { id: 'pln_50', name: 'Token PLN 50.000', price: 51500 },
+                { id: 'pln_100', name: 'Token PLN 100.000', price: 101500 }
+            ],
+            special: []
+        },
+        'Pulsa Reguler': {
+            nominal: [
+                { id: 'pls_5', name: 'Pulsa 5.000', price: 7000 },
+                { id: 'pls_10', name: 'Pulsa 10.000', price: 12000 },
+                { id: 'pls_20', name: 'Pulsa 20.000', price: 22000 },
+                { id: 'pls_50', name: 'Pulsa 50.000', price: 51500 }
+            ],
+            special: []
+        }
+    };
+
+    // SYSTEM STATE
+    let currentState = {
+        game: 'Free Fire',
+        itemName: '',
+        itemPrice: 0,
+        qty: 1
+    };
+
+    let audioPlaying = false;
+
+    // INIT
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCatalog('Free Fire');
+    });
+
+    // GAME CATEGORY SWITCHER
+    function selectGame(element, gameName, bannerImage, inputLabelText) {
+        document.querySelectorAll('.game-card').forEach(card => card.classList.remove('active'));
+        element.classList.add('active');
+
+        currentState.game = gameName;
+        currentState.itemName = '';
+        currentState.itemPrice = 0;
+
+        document.getElementById('banner-img').src = bannerImage;
+        document.getElementById('form-step-title').innerText = `Lengkapi Data Akun ${gameName}`;
+        document.getElementById('player-id').placeholder = `Masukkan ${inputLabelText}`;
+        document.getElementById('player-id').value = '';
+        document.getElementById('player-zone').value = '';
+
+        const mlZoneWrap = document.getElementById('ml-zone-wrap');
+        mlZoneWrap.style.display = (gameName === 'Mobile Legends') ? 'block' : 'none';
+
+        renderCatalog(gameName);
+    }
+
+    // RENDER CATALOG ITEMS
+    function renderCatalog(gameName) {
+        const nomGrid = document.getElementById('nominal-grid');
+        const specGrid = document.getElementById('special-grid');
+        const nomCard = document.getElementById('step-nominal-card');
+        const specCard = document.getElementById('step-special-card');
+
+        nomGrid.innerHTML = '';
+        specGrid.innerHTML = '';
+
+        const catalog = DATABASE_GAME[gameName];
+        if (!catalog) return;
+
+        // Render Standard Nominals
+        if (catalog.nominal && catalog.nominal.length > 0) {
+            nomCard.classList.remove('hidden');
+            catalog.nominal.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.onclick = () => selectItem(card, item.name, item.price);
+
+                let badgeHTML = item.badge ? `<span class="item-badge">${item.badge}</span>` : '';
+                card.innerHTML = `
+                    ${badgeHTML}
+                    <div class="item-title">${item.name}</div>
+                    <div class="item-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+                `;
+                nomGrid.appendChild(card);
+            });
+        } else {
+            nomCard.classList.add('hidden');
+        }
+
+        // Render Specials/Membership
+        if (catalog.special && catalog.special.length > 0) {
+            specCard.classList.remove('hidden');
+            catalog.special.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'voucher-card';
+                card.onclick = () => selectItem(card, item.name, item.price);
+
+                const fallbackImg = `https://placehold.co/200x100/182030/f3ba2f?text=${encodeURIComponent(item.name)}`;
+                card.innerHTML = `
+                    <img src="${item.img || fallbackImg}" class="voucher-img" onerror="this.src='${fallbackImg}'">
+                    <div class="voucher-body">
+                        <div class="voucher-title">${item.name}</div>
+                        <div class="voucher-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+                    </div>
+                `;
+                specGrid.appendChild(card);
+            });
+        } else {
+            specCard.classList.add('hidden');
+        }
+    }
+
+    // SELECT ITEM
+    function selectItem(element, name, price) {
+        document.querySelectorAll('.item-card, .voucher-card').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+
+        currentState.itemName = name;
+        currentState.itemPrice = price;
+    }
+
+    // QUANTITY CONTROL
+    function updateQty(change) {
+        let field = document.getElementById('qty-field');
+        let current = parseInt(field.value) || 1;
+        current += change;
+        if (current < 1) current = 1;
+        field.value = current;
+        currentState.qty = current;
+    }
+
+    // SUBMIT & VALIDATION
+    function submitOrder() {
+        const playerId = document.getElementById('player-id').value.trim();
+        const playerZone = document.getElementById('player-zone').value.trim();
+
+        if (!playerId) {
+            showToast("Harap isi ID Tujuan / Nomor Pelanggan.");
+            return;
+        }
+
+        if (currentState.game === 'Mobile Legends' && !playerZone) {
+            showToast("Harap isi Zone ID Mobile Legends.");
+            return;
+        }
+
+        if (!currentState.itemName || currentState.itemPrice === 0) {
+            showToast("Silakan pilih Nominal TopUp terlebih dahulu.");
+            return;
+        }
+
+        // Set Invoice Modal Data
+        document.getElementById('inv-game').innerText = currentState.game;
+        
+        let formattedId = playerId;
+        if (currentState.game === 'Mobile Legends' && playerZone) {
+            formattedId += ` (${playerZone})`;
+        }
+        document.getElementById('inv-target').innerText = formattedId;
+        document.getElementById('inv-item').innerText = currentState.itemName;
+        document.getElementById('inv-qty').innerText = currentState.qty;
+
+        const grandTotal = currentState.itemPrice * currentState.qty;
+        document.getElementById('inv-total').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
+
+        openModal('modal-checkout');
+    }
+
+    // WHATSAPP CHECKOUT GENERATOR
+    function sendToWhatsApp() {
+        const playerId = document.getElementById('player-id').value.trim();
+        const playerZone = document.getElementById('player-zone').value.trim();
+        const grandTotal = (currentState.itemPrice * currentState.qty).toLocaleString('id-ID');
+
+        let targetIdStr = playerId;
+        if (currentState.game === 'Mobile Legends' && playerZone) {
+            targetIdStr += ` (Server ${playerZone})`;
+        }
+
+        const messageText = 
+`*PESANAN BARU - MAKOCHI TOPUP*
+----------------------------------------
+🎮 *Layanan:* ${currentState.game}
+🆔 *ID Tujuan:* ${targetIdStr}
+📦 *Produk:* ${currentState.itemName}
+🔢 *Jumlah:* ${currentState.qty}
+💰 *Total Bayar:* Rp ${grandTotal}
+💳 *Pembayaran:* QRIS
+
+----------------------------------------
+_Halo Min, mohon konfirmasi pesanan ini. Terima kasih!_`;
+
+        const waLink = `https://wa.me/${WA_ADMIN_NUMBER}?text=${encodeURIComponent(messageText)}`;
+        window.open(waLink, '_blank');
+        closeModal('modal-checkout');
+    }
+
+    // MODAL CONTROL
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('active');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    function openNoticeModal() {
+        openModal('modal-notice');
+        document.getElementById('unread-dot').style.display = 'none';
+    }
+
+    // TOAST NOTIFICATION SYSTEM
+    function showToast(message) {
+        const toast = document.getElementById('toast-msg');
+        document.getElementById('toast-text').innerText = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // AUDIO PLAYER
+    function toggleAudio() {
+        const player = document.getElementById('audio-player');
+        const widget = document.getElementById('audio-widget');
+        const icon = document.getElementById('audio-icon');
+        const label = document.getElementById('audio-text');
+
+        if (audioPlaying) {
+            player.pause();
+            widget.classList.remove('playing');
+            icon.className = 'fa-solid fa-music audio-icon';
+            label.innerText = 'Musik Off';
+        } else {
+            player.play().then(() => {
+                widget.classList.add('playing');
+                icon.className = 'fa-solid fa-volume-high audio-icon';
+                label.innerText = 'Playing';
+            }).catch(() => {
+                showToast("Klik sekali lagi untuk mengaktifkan musik.");
+            });
+        }
+        audioPlaying = !audioPlaying;
+    }
+</script>
+
+</body>
+</html>
