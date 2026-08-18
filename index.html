@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makochi-Topup</title>
+    <title>Makochi Official - Topup Game Instant</title>
     
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -476,7 +476,7 @@
             <div class="step-card" id="step-special-card">
                 <div class="step-header">
                     <div class="step-num"><i class="fa-solid fa-crown"></i></div>
-                    <div class="step-title">Paket Membership</div>
+                    <div class="step-title">Penawaran Spesial</div>
                 </div>
                 <div class="voucher-grid" id="special-grid"></div>
             </div>
@@ -620,27 +620,55 @@
     const DATABASE_GAME = {
         'Free Fire': {
             nominal: [
-                { id: 'ff_5', name: '5 Diamonds', price: 1000, badge: 'Murah' },
-                { id: 'ff_12', name: '12 Diamonds', price: 2000 },
-                { id: 'ff_50', name: '50 Diamonds', price: 8000 },
-                { id: 'ff_70', name: '70 Diamonds', price: 12000, badge: 'Hot' },
+                { id: 'ff_5', name: '5 Diamonds', price: 1000 },
+                { id: 'ff_12', name: '12 Diamonds', price: 2500 },
+                { id: 'ff_50', name: '50 Diamonds', price: 7500 },
+                { id: 'ff_70', name: '70 Diamonds', price: 12000 },
+                { id: 'ff_91', name: '91 Diamonds', price: 15000 },
                 { id: 'ff_140', name: '140 Diamonds', price: 22000 },
-                { id: 'ff_720', name: '720 Diamonds', price: 105000, badge: 'Best' }
+                { id: 'ff_355', name: '355 Diamonds', price: 52000 },
+                { id: 'ff_720', name: '720 Diamonds', price: 102000, badge: 'Best' },
+                { id: 'ff_1450', name: '1.450 Diamonds', price: 203000 },
+                { id: 'ff_2180', name: '2.180 Diamonds', price: 303000 },
+                { id: 'ff_3640', name: '3.640 Diamonds', price: 503000 },
+                { id: 'ff_7290', name: '7.290 Diamonds', price: 1003000, badge: 'Hot' },
+                { id: 'ff_36500', name: '36.500 Diamonds', price: 5003000 },
+                { id: 'ff_73100', name: '73.100 Diamonds', price: 10003000 }
             ],
             special: [
-                { id: 'ff_weekly', name: 'Weekly Membership', price: 32000, img: 'ff1.png' },
-                { id: 'ff_monthly', name: 'Monthly Membership', price: 115000, img: 'ff1.png' }
+                { id: 'ff_weekly', name: 'Member Mingguan', price: 30000, img: 'ff1.png' },
+                { id: 'ff_monthly', name: 'Member Bulanan', price: 110000, img: 'ff1.png' },
+                { id: 'ff_bp', name: 'BP Card', price: 50000, img: 'ff1.png' }
             ]
         },
         'Mobile Legends': {
             nominal: [
-                { id: 'ml_5', name: '5 Diamonds (4+1)', price: 1500 },
-                { id: 'ml_28', name: '28 Diamonds (25+3)', price: 8000 },
-                { id: 'ml_85', name: '85 Diamonds', price: 24000, badge: 'Hot' },
-                { id: 'ml_172', name: '172 Diamonds', price: 48000 }
+                { id: 'ml_3', name: '3 Diamonds', price: 1000 },
+                { id: 'ml_14', name: '14 Diamonds', price: 4000 },
+                { id: 'ml_28', name: '28 Diamonds', price: 8000 },
+                { id: 'ml_56', name: '56 Diamonds', price: 15000 },
+                { id: 'ml_85', name: '85 Diamonds', price: 23000, badge: 'Hot' },
+                { id: 'ml_112', name: '112 Diamonds', price: 30000 },
+                { id: 'ml_141', name: '141 Diamonds', price: 38000 },
+                { id: 'ml_172', name: '172 Diamonds', price: 46000 },
+                { id: 'ml_257', name: '257 Diamonds', price: 68000 },
+                { id: 'ml_284', name: '284 Diamonds', price: 75000 },
+                { id: 'ml_344', name: '344 Diamonds', price: 90000 },
+                { id: 'ml_429', name: '429 Diamonds', price: 112000 },
+                { id: 'ml_565', name: '565 Diamonds', price: 148000, badge: 'Best' },
+                { id: 'ml_875', name: '875 Diamonds', price: 225000 },
+                { id: 'ml_963', name: '963 Diamonds', price: 248000 },
+                { id: 'ml_1159', name: '1.159 Diamonds', price: 298000 },
+                { id: 'ml_1412', name: '1.412 Diamonds', price: 360000 },
+                { id: 'ml_2195', name: '2.195 Diamonds', price: 560000 },
+                { id: 'ml_2976', name: '2.976 Diamonds', price: 750000 },
+                { id: 'ml_4394', name: '4.394 Diamonds', price: 1100000 },
+                { id: 'ml_5532', name: '5.532 Diamonds', price: 1400000 },
+                { id: 'ml_6042', name: '6.042 Diamonds', price: 1500000 }
             ],
             special: [
-                { id: 'ml_wdp', name: 'Weekly Diamond Pass', price: 28000, img: 'ml.png' }
+                { id: 'ml_wdp', name: 'Weekly Diamond Pass', price: 28000, img: 'ml.png' },
+                { id: 'ml_twilight', name: 'Twilight Pass', price: 150000, img: 'ml.png' }
             ]
         }
     };
@@ -648,7 +676,7 @@
     let currentState = { game: 'Free Fire', itemName: '', itemPrice: 0, qty: 1, targetId: '' };
     let audioPlaying = false;
 
-    // Database Riwayat Publik dimulai kosong (tidak ada transaksi dummy)
+    // Database Riwayat Publik dimulai kosong
     let publicHistory = [];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -749,12 +777,10 @@
     function sendToWhatsApp() {
         const totalStr = 'Rp ' + (currentState.itemPrice * currentState.qty).toLocaleString('id-ID');
         
-        // Format Tanggal, Bulan, Tahun Realtime (Bahasa Indonesia)
         const now = new Date();
         const options = { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' };
         const dateTimeString = now.toLocaleDateString('id-ID', options) + ' WIB';
 
-        // Masukkan transaksi ke riwayat publik agar muncul saat ada pembeli
         publicHistory.unshift({
             game: currentState.game,
             target: maskTargetId(currentState.targetId),
@@ -766,7 +792,6 @@
 
         renderHistory();
 
-        // Buka WhatsApp Admin
         const text = `*PESANAN BARU - MAKOCHI*\n\n🎮 Layanan: ${currentState.game}\n🆔 ID Tujuan: ${currentState.targetId}\n📦 Produk: ${currentState.itemName}\n🔢 Jumlah: ${currentState.qty}\n💰 Total: ${totalStr}\n💳 Pembayaran: QRIS\n\n_Mohon proses pesanan saya. Terima kasih!_`;
         window.open(`https://wa.me/${WA_ADMIN_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
         closeModal('modal-checkout');
