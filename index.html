@@ -14,14 +14,9 @@
     <style>
         /* --- MODERN DESIGN SYSTEM --- */
         :root {
-            --bg-body: #0b0f19;
             --bg-surface: #151c2c;
             --bg-surface-hover: #1e273c;
             --bg-input: #080b12;
-            
-            --primary: #F5A623;
-            --primary-hover: #E09612;
-            --primary-glow: rgba(245, 166, 35, 0.15);
             
             --success: #10b981;
             --danger: #ef4444;
@@ -32,7 +27,7 @@
             --text-muted: #64748b;
             
             --border: rgba(255, 255, 255, 0.06);
-            --border-active: rgba(245, 166, 35, 0.5);
+            --border-active: rgba(255, 255, 255, 0.2);
             
             --radius-xl: 20px;
             --radius-lg: 16px;
@@ -40,10 +35,41 @@
             --radius-sm: 8px;
             
             --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.2);
-            --shadow-glow: 0 0 20px var(--primary-glow);
-            
             --font-family: 'Plus Jakarta Sans', sans-serif;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- TEMA FREE FIRE (ORANYE) --- */
+        body.theme-ff {
+            --bg-body: #0b0f19;
+            --primary: #F5A623;
+            --primary-hover: #E09612;
+            --primary-glow: rgba(245, 166, 35, 0.15);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(245, 166, 35, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(239, 68, 68, 0.05) 0%, transparent 40%);
+        }
+
+        /* --- TEMA MOBILE LEGENDS (BIRU) --- */
+        body.theme-ml {
+            --bg-body: #08101a;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.06) 0%, transparent 40%);
+        }
+
+        /* --- ANIMASI FADE IN & FADE OUT --- */
+        .fade-content {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .fade-out {
+            opacity: 0;
+            transform: translateY(15px);
         }
 
         /* --- BASE STYLES --- */
@@ -61,10 +87,8 @@
             line-height: 1.6;
             padding-bottom: 110px;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(245, 166, 35, 0.04) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
             background-attachment: fixed;
+            transition: background-color 0.5s ease;
         }
 
         .container {
@@ -87,6 +111,7 @@
                 overflow: hidden;
                 position: relative;
                 padding-bottom: 80px;
+                transition: background-color 0.5s ease;
             }
             .bottom-nav { position: absolute; bottom: 0; }
             .header { border-top-left-radius: 24px; border-top-right-radius: 24px; }
@@ -108,19 +133,9 @@
             padding: 16px 0;
         }
 
-        .header-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
+        .header-wrap { display: flex; align-items: center; justify-content: space-between; }
         .brand { display: flex; align-items: center; gap: 12px; }
-
-        .brand-logo {
-            width: 42px; height: 42px; border-radius: 50%;
-            object-fit: cover; border: 2px solid var(--primary); padding: 2px;
-        }
-
+        .brand-logo { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); padding: 2px; transition: border-color 0.5s ease; }
         .brand-info { display: flex; flex-direction: column; }
         .brand-title { font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 6px; letter-spacing: -0.5px; }
         .verified-badge { color: var(--info); font-size: 0.9rem; }
@@ -151,18 +166,19 @@
         .banner-img { width: 100%; height: 160px; object-fit: cover; display: block; border-radius: var(--radius-lg); }
         .banner-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(0deg, rgba(11,15,25,1) 0%, rgba(11,15,25,0) 60%);
-            display: flex; align-items: flex-end; padding: 16px;
+            background: linear-gradient(0deg, var(--bg-body) 0%, rgba(11,15,25,0) 70%);
+            display: flex; align-items: flex-end; padding: 16px; transition: background 0.5s ease;
         }
         .banner-tag {
-            background: rgba(245, 166, 35, 0.2); color: var(--primary);
+            background: var(--primary-glow); color: var(--primary);
             border: 1px solid var(--primary); font-size: 0.7rem; font-weight: 700;
             padding: 6px 12px; border-radius: 20px; text-transform: uppercase; backdrop-filter: blur(4px);
+            transition: all 0.5s ease;
         }
 
         /* --- SECTION HEADINGS --- */
         .section-title { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .section-title i { color: var(--primary); font-size: 1rem; }
+        .section-title i { color: var(--primary); font-size: 1rem; transition: color 0.5s ease; }
 
         /* --- GAME SELECTOR --- */
         .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
@@ -172,7 +188,7 @@
             cursor: pointer; transition: var(--transition);
         }
         .game-card:hover { background: var(--bg-surface-hover); }
-        .game-card.active { background: var(--primary-glow); border-color: var(--primary); box-shadow: var(--shadow-glow); }
+        .game-card.active { background: var(--primary-glow); border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
         .game-thumb { width: 40px; height: 40px; border-radius: var(--radius-sm); object-fit: cover; }
         .game-name { font-size: 0.85rem; font-weight: 700; line-height: 1.2; }
 
@@ -185,11 +201,12 @@
         .step-num {
             width: 28px; height: 28px; border-radius: 8px; background: var(--primary); color: #000;
             display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; flex-shrink: 0;
+            transition: background 0.5s ease;
         }
         .step-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
 
         /* --- FORM INPUTS --- */
-        .input-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        .input-grid { display: grid; grid-template-columns: 1fr; gap: 14px; transition: all 0.3s ease; }
         .input-grid.has-zone { grid-template-columns: 1.5fr 1fr; }
         .input-group { display: flex; flex-direction: column; gap: 8px; }
         .input-label { font-size: 0.75rem; font-weight: 600; color: var(--text-sub); }
@@ -205,20 +222,20 @@
         .form-control:focus + .input-icon, .input-wrapper:focus-within .input-icon { color: var(--primary); }
 
         /* --- ITEM CARDS --- */
-        .items-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .items-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-height: 400px; overflow-y: auto; padding-right: 4px; }
         .item-card {
             background: var(--bg-input); border: 1px solid var(--border);
             border-radius: var(--radius-md); padding: 16px; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden;
         }
-        .item-card:hover { border-color: rgba(245, 166, 35, 0.3); transform: translateY(-2px); }
-        .item-card.active { background: var(--primary-glow); border-color: var(--primary); box-shadow: 0 4px 15px rgba(245, 166, 35, 0.1); }
+        .item-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .item-card.active { background: var(--primary-glow); border-color: var(--primary); box-shadow: 0 4px 15px var(--primary-glow); }
         .item-badge {
             position: absolute; top: 0; right: 0; background: var(--danger); color: #fff; font-size: 0.6rem; font-weight: 800; padding: 4px 10px;
             border-bottom-left-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px;
         }
         .item-card.active .item-badge { background: var(--primary); color: #000; }
         .item-title { font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px; line-height: 1.3;}
-        .item-price { font-size: 1rem; font-weight: 800; color: var(--primary); }
+        .item-price { font-size: 1rem; font-weight: 800; color: var(--primary); transition: color 0.5s ease; }
 
         /* --- SPECIAL VOUCHERS --- */
         .voucher-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 12px; }
@@ -226,12 +243,12 @@
             background: var(--bg-input); border: 1px solid var(--border);
             border-radius: var(--radius-md); overflow: hidden; cursor: pointer; display: flex; align-items: center; transition: var(--transition);
         }
-        .voucher-card:hover { transform: translateY(-2px); border-color: rgba(245, 166, 35, 0.3); }
+        .voucher-card:hover { transform: translateY(-2px); border-color: var(--primary); }
         .voucher-card.active { border-color: var(--primary); background: var(--primary-glow); }
         .voucher-img { width: 80px; height: 80px; object-fit: cover; border-right: 1px solid var(--border); }
         .voucher-body { padding: 12px 16px; flex: 1; }
         .voucher-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
-        .voucher-price { font-size: 0.95rem; color: var(--primary); font-weight: 800; }
+        .voucher-price { font-size: 0.95rem; color: var(--primary); font-weight: 800; transition: color 0.5s ease; }
 
         /* --- QTY & SUBMIT --- */
         .checkout-bar {
@@ -251,12 +268,12 @@
         .qty-field { width: 40px; text-align: center; background: transparent; border: none; color: var(--text-main); font-weight: 800; font-size: 0.95rem; }
 
         .btn-submit {
-            width: 100%; background: linear-gradient(135deg, var(--primary) 0%, #d48a17 100%);
+            width: 100%; background: var(--primary);
             color: #000; border: none; padding: 16px; border-radius: var(--radius-md); font-size: 1rem; font-weight: 800; cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 8px 20px rgba(245, 166, 35, 0.25); transition: var(--transition); text-transform: uppercase; letter-spacing: 0.5px;
+            box-shadow: 0 8px 20px var(--primary-glow); transition: all 0.5s ease; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(245, 166, 35, 0.4); }
+        .btn-submit:hover { transform: translateY(-2px); background: var(--primary-hover); box-shadow: 0 10px 25px var(--primary-glow); }
 
         /* --- FLOATING AUDIO WIDGET --- */
         .audio-widget {
@@ -266,18 +283,18 @@
             display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow-soft);
             cursor: pointer; transition: var(--transition);
         }
-        .audio-widget:hover { border-color: rgba(245, 166, 35, 0.5); }
+        .audio-widget:hover { border-color: var(--primary); }
         .audio-widget.playing { 
             background: var(--primary-glow); 
             border-color: var(--primary); 
-            box-shadow: var(--shadow-glow);
+            box-shadow: 0 0 20px var(--primary-glow);
             animation: audio-pulse 2s infinite;
         }
-        .audio-widget i { color: var(--primary); font-size: 0.9rem; }
+        .audio-widget i { color: var(--primary); font-size: 0.9rem; transition: color 0.5s ease;}
         .audio-widget span { font-size: 0.75rem; font-weight: 700; color: var(--text-main); }
 
         @keyframes audio-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.4); }
+            0% { box-shadow: 0 0 0 0 var(--primary-glow); }
             70% { box-shadow: 0 0 0 10px rgba(245, 166, 35, 0); }
             100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0); }
         }
@@ -290,7 +307,7 @@
             padding: 12px 0 calc(12px + env(safe-area-inset-bottom)); z-index: 100;
         }
         .nav-link { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.65rem; font-weight: 600; text-decoration: none; transition: var(--transition); cursor: pointer; }
-        .nav-link i { font-size: 1.2rem; }
+        .nav-link i { font-size: 1.2rem; transition: color 0.5s ease; }
         .nav-link.active, .nav-link:hover { color: var(--primary); }
 
         /* --- VIEW SECTIONS (SPA Switcher) --- */
@@ -303,7 +320,7 @@
             background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px;
             display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow-soft); transition: var(--transition);
         }
-        .history-card:hover { border-color: rgba(245, 166, 35, 0.3); }
+        .history-card:hover { border-color: var(--primary); }
         .history-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
         .history-game { font-size: 0.85rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 6px; }
         .history-status { background: rgba(16, 185, 129, 0.15); color: var(--success); font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 20px; text-transform: uppercase; }
@@ -317,7 +334,7 @@
         .faq-item { margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
         .faq-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
         .faq-q { font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-        .faq-q i { color: var(--primary); }
+        .faq-q i { color: var(--primary); transition: color 0.5s ease; }
         .faq-a { font-size: 0.75rem; color: var(--text-sub); line-height: 1.5; }
         .help-contact-btn {
             background: #25d366; color: #fff; width: 100%; border: none; padding: 14px; border-radius: var(--radius-md);
@@ -338,7 +355,6 @@
             transform: translateY(20px) scale(0.95); transition: all 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
         .modal-backdrop.show .modal-card { transform: translateY(0) scale(1); }
-
         .modal-header { text-align: center; margin-bottom: 24px; }
         .modal-title { font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
@@ -363,7 +379,7 @@
 
         /* Notices */
         .notice-feed { display: flex; flex-direction: column; gap: 12px; max-height: 300px; overflow-y: auto; margin-bottom: 20px; padding-right: 4px; }
-        .notice-card { background: var(--bg-input); border-left: 3px solid var(--primary); border-radius: var(--radius-md); padding: 14px; }
+        .notice-card { background: var(--bg-input); border-left: 3px solid var(--primary); border-radius: var(--radius-md); padding: 14px; transition: border-color 0.5s ease; }
         .notice-card-header { font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .notice-card-body { font-size: 0.75rem; color: var(--text-sub); line-height: 1.5; }
 
@@ -374,7 +390,7 @@
         .hidden { display: none !important; }
     </style>
 </head>
-<body>
+<body class="theme-ff">
 
 <div class="main-wrapper">
 
@@ -413,8 +429,9 @@
     <!-- ================= VIEW 1: HOME (BERANDA) ================= -->
     <div id="view-home" class="page-view active">
         <main class="container">
+            
             <!-- HERO PROMO BANNER -->
-            <div class="hero-banner">
+            <div id="dynamic-banner" class="hero-banner fade-content">
                 <img id="banner-img" src="ff.png" alt="Promo Banner" class="banner-img" onerror="this.src='https://placehold.co/680x300/1e273c/cbd5e1?text=MAKOCHI+GAMING'">
                 <div class="banner-overlay">
                     <span class="banner-tag"><i class="fa-solid fa-bolt"></i> Proses 1 Detik</span>
@@ -434,51 +451,54 @@
                 </div>
             </div>
 
-            <!-- 2. USER ID FORM -->
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-num">1</div>
-                    <div class="step-title" id="form-step-title">Masukkan Data Akun</div>
-                </div>
-                
-                <div class="input-grid" id="input-grid">
-                    <div class="input-group">
-                        <label class="input-label" id="label-player-id">PLAYER ID</label>
-                        <div class="input-wrapper">
-                            <input type="text" id="player-id" class="form-control" placeholder="Ketik ID disini" autocomplete="off">
-                            <i class="fa-solid fa-user input-icon"></i>
-                        </div>
+            <!-- WRAPPER KONTEN FADE -->
+            <div id="dynamic-steps" class="fade-content">
+                <!-- 2. USER ID FORM -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-num">1</div>
+                        <div class="step-title" id="form-step-title">Masukkan Data Akun</div>
                     </div>
                     
-                    <div class="input-group hidden" id="ml-zone-wrap">
-                        <label class="input-label">ZONE ID</label>
-                        <div class="input-wrapper">
-                            <input type="text" id="player-zone" class="form-control" placeholder="(1234)" maxlength="6" autocomplete="off">
-                            <i class="fa-solid fa-server input-icon"></i>
+                    <div class="input-grid" id="input-grid">
+                        <div class="input-group">
+                            <label class="input-label" id="label-player-id">PLAYER ID</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="player-id" class="form-control" placeholder="Ketik ID disini" autocomplete="off">
+                                <i class="fa-solid fa-user input-icon"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group hidden" id="ml-zone-wrap">
+                            <label class="input-label">ZONE ID</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="player-zone" class="form-control" placeholder="(1234)" maxlength="6" autocomplete="off">
+                                <i class="fa-solid fa-server input-icon"></i>
+                            </div>
                         </div>
                     </div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px;">
+                        <i class="fa-solid fa-circle-info"></i> Pastikan ID yang dimasukkan sudah benar.
+                    </div>
                 </div>
-                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px;">
-                    <i class="fa-solid fa-circle-info"></i> Pastikan ID yang dimasukkan sudah benar.
-                </div>
-            </div>
 
-            <!-- 3. NOMINAL SELECTION -->
-            <div class="step-card" id="step-nominal-card">
-                <div class="step-header">
-                    <div class="step-num">2</div>
-                    <div class="step-title">Pilih Nominal Top Up</div>
+                <!-- 3. NOMINAL SELECTION -->
+                <div class="step-card" id="step-nominal-card">
+                    <div class="step-header">
+                        <div class="step-num">2</div>
+                        <div class="step-title">Pilih Nominal Top Up</div>
+                    </div>
+                    <div class="items-grid" id="nominal-grid"></div>
                 </div>
-                <div class="items-grid" id="nominal-grid"></div>
-            </div>
 
-            <!-- 4. SPECIAL VOUCHERS -->
-            <div class="step-card" id="step-special-card">
-                <div class="step-header">
-                    <div class="step-num"><i class="fa-solid fa-crown"></i></div>
-                    <div class="step-title">Penawaran Spesial</div>
+                <!-- 4. SPECIAL VOUCHERS -->
+                <div class="step-card" id="step-special-card">
+                    <div class="step-header">
+                        <div class="step-num"><i class="fa-solid fa-crown"></i></div>
+                        <div class="step-title">Penawaran Spesial</div>
+                    </div>
+                    <div class="voucher-grid" id="special-grid"></div>
                 </div>
-                <div class="voucher-grid" id="special-grid"></div>
             </div>
 
             <!-- CHECKOUT BAR (STICKY) -->
@@ -504,9 +524,7 @@
             <div class="section-title" style="margin-top: 20px;"><i class="fa-solid fa-receipt"></i> Riwayat Transaksi Publik</div>
             <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 16px;">Semua transaksi real-time yang berhasil diproses sistem.</p>
             
-            <div id="history-container" class="history-list">
-                <!-- Data riwayat akan kosong saat belum ada pembeli -->
-            </div>
+            <div id="history-container" class="history-list"></div>
         </main>
     </div>
 
@@ -523,7 +541,7 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-q"><i class="fa-solid fa-circle-question"></i> Bagaimana jika diamond belum masuk?</div>
-                    <div class="faq-a">Pastikan ID dan Zone ID (jika Mobile Legends) sudah diisi dengan benar. Jika masih belum masuk setelah 10 menit, silakan hubungi admin via WhatsApp.</div>
+                    <div class="faq-a">Pastikan ID dan Zone ID sudah diisi dengan benar. Jika belum masuk setelah 10 menit, silakan hubungi admin via WhatsApp.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q"><i class="fa-solid fa-circle-question"></i> Metode pembayaran apa saja yang didukung?</div>
@@ -605,7 +623,7 @@
             </div>
             <div class="notice-card">
                 <div class="notice-card-header"><i class="fa-solid fa-shield-halved" style="color: var(--success);"></i> Transaksi Aman 100%</div>
-                <div class="notice-card-body">Harga bersaing biaya admin tersembunyi. Semua layanan legal dan resmi.</div>
+                <div class="notice-card-body">Harga bersaing tanpa biaya admin tersembunyi. Semua layanan legal dan resmi.</div>
             </div>
         </div>
         <button class="btn-submit" style="border-radius: 30px;" onclick="closeModal('modal-notice')">Mengerti</button>
@@ -614,69 +632,52 @@
 
 <!-- JAVASCRIPT LOGIC -->
 <script>
-    // CONFIGURATION
     const WA_ADMIN_NUMBER = "6289513623197";
 
+    // DATABASE PRODUK SESUAI KIOSGAMER UNTUK FF & GOPAY UNTUK ML
     const DATABASE_GAME = {
         'Free Fire': {
             nominal: [
                 { id: 'ff_5', name: '5 Diamonds', price: 1000 },
-                { id: 'ff_12', name: '12 Diamonds', price: 2500 },
-                { id: 'ff_50', name: '50 Diamonds', price: 7500 },
-                { id: 'ff_70', name: '70 Diamonds', price: 12000, badge: 'HOT' },
-                { id: 'ff_91', name: '91 Diamonds', price: 15000 },
+                { id: 'ff_12', name: '12 Diamonds', price: 2000 },
+                { id: 'ff_50', name: '50 Diamonds', price: 8000 },
+                { id: 'ff_70', name: '70 Diamonds', price: 12000 },
+                { id: 'ff_91', name: '91 Diamonds', price: 14000 },
                 { id: 'ff_140', name: '140 Diamonds', price: 22000 },
                 { id: 'ff_355', name: '355 Diamonds', price: 52000 },
-                { id: 'ff_720', name: '720 Diamonds', price: 102000, badge: 'HOT' },
+                { id: 'ff_720', name: '720 Diamonds', price: 103000 },
                 { id: 'ff_1450', name: '1.450 Diamonds', price: 203000 },
                 { id: 'ff_2180', name: '2.180 Diamonds', price: 303000 },
                 { id: 'ff_3640', name: '3.640 Diamonds', price: 503000 },
-                { id: 'ff_7290', name: '7.290 Diamonds', price: 1003000 },
-                { id: 'ff_36500', name: '36.500 Diamonds', price: 5003000 },
+                { id: 'ff_7290', name: '7.290 Diamonds', price: 1005000 },
+                { id: 'ff_36500', name: '36.500 Diamonds', price: 5005000 },
                 { id: 'ff_73100', name: '73.100 Diamonds', price: 10003000 }
             ],
             special: [
                 { id: 'ff_weekly', name: 'Member Mingguan', price: 30000, img: 'ff1.png' },
-                { id: 'ff_monthly', name: 'Member Bulanan', price: 110000, img: 'ff1.png' },
                 { id: 'ff_bp', name: 'BP Card', price: 50000, img: 'ff1.png' }
             ]
         },
         'Mobile Legends': {
             nominal: [
-                { id: 'ml_3', name: '3 Diamonds', price: 1000 },
-                { id: 'ml_14', name: '14 Diamonds', price: 4000 },
-                { id: 'ml_28', name: '28 Diamonds', price: 8000 },
-                { id: 'ml_56', name: '56 Diamonds', price: 15000 },
-                { id: 'ml_85', name: '85 Diamonds', price: 23000, badge: 'Hot' },
-                { id: 'ml_112', name: '112 Diamonds', price: 30000 },
-                { id: 'ml_141', name: '141 Diamonds', price: 38000 },
-                { id: 'ml_172', name: '172 Diamonds', price: 46000 },
-                { id: 'ml_257', name: '257 Diamonds', price: 68000 },
-                { id: 'ml_284', name: '284 Diamonds', price: 75000 },
-                { id: 'ml_344', name: '344 Diamonds', price: 90000 },
-                { id: 'ml_429', name: '429 Diamonds', price: 112000 },
-                { id: 'ml_565', name: '565 Diamonds', price: 148000, badge: 'Best' },
-                { id: 'ml_875', name: '875 Diamonds', price: 225000 },
-                { id: 'ml_963', name: '963 Diamonds', price: 248000 },
-                { id: 'ml_1159', name: '1.159 Diamonds', price: 298000 },
-                { id: 'ml_1412', name: '1.412 Diamonds', price: 360000 },
-                { id: 'ml_2195', name: '2.195 Diamonds', price: 560000 },
-                { id: 'ml_2976', name: '2.976 Diamonds', price: 750000 },
-                { id: 'ml_4394', name: '4.394 Diamonds', price: 1100000 },
-                { id: 'ml_5532', name: '5.532 Diamonds', price: 1400000 },
-                { id: 'ml_6042', name: '6.042 Diamonds', price: 1500000 }
+                { id: 'ml_5', name: '5 Diamonds', price: 2000 },
+                { id: 'ml_12', name: '12 Diamonds', price: 4000 },
+                { id: 'ml_59', name: '59 Diamonds', price: 20000 },
+                { id: 'ml_110', name: '110 Diamonds', price: 37000 },
+                { id: 'ml_277', name: '277 Diamonds', price: 93000 },
+                { id: 'ml_568', name: '568 Diamonds', price: 180000 },
+                { id: 'ml_790', name: '790 Diamonds', price: 280000 }
             ],
             special: [
-                { id: 'ml_wdp', name: 'Weekly Diamond Pass', price: 28000, img: 'ml.png' },
-                { id: 'ml_twilight', name: 'Twilight Pass', price: 150000, img: 'ml.png' }
+                { id: 'ml_wdp', name: 'Weekly Diamond Pass', price: 32000, img: 'ml.png' },
+                { id: 'ml_elite', name: 'Weekly Diamond Pass x2', price: 70000, img: 'ml.png' },
+                { id: 'ml_first100', name: 'Weekly Diamond Pass x3', price: 100000, img: 'ml.png' },
             ]
         }
     };
 
     let currentState = { game: 'Free Fire', itemName: '', itemPrice: 0, qty: 1, targetId: '' };
     let audioPlaying = false;
-
-    // Database Riwayat Publik dimulai kosong
     let publicHistory = [];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -684,7 +685,6 @@
         renderHistory();
     });
 
-    // SPA Switcher Tab
     function switchTab(tabId) {
         document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
         document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
@@ -695,26 +695,48 @@
     }
 
     function selectGame(element, gameName, bannerImage, inputLabelText) {
+        if(currentState.game === gameName) return;
+
         document.querySelectorAll('.game-card').forEach(card => card.classList.remove('active'));
         element.classList.add('active');
 
-        currentState.game = gameName; currentState.itemName = ''; currentState.itemPrice = 0;
+        const dynamicBanner = document.getElementById('dynamic-banner');
+        const dynamicSteps = document.getElementById('dynamic-steps');
+        
+        dynamicBanner.classList.add('fade-out');
+        dynamicSteps.classList.add('fade-out');
 
-        document.getElementById('banner-img').src = bannerImage;
-        document.getElementById('label-player-id').innerText = inputLabelText;
-        document.getElementById('player-id').placeholder = `Ketik ${inputLabelText} disini`;
-        document.getElementById('player-id').value = '';
-        document.getElementById('player-zone').value = '';
+        setTimeout(() => {
+            currentState.game = gameName; 
+            currentState.itemName = ''; 
+            currentState.itemPrice = 0;
 
-        const inputGrid = document.getElementById('input-grid');
-        const mlZoneWrap = document.getElementById('ml-zone-wrap');
+            document.getElementById('banner-img').src = bannerImage;
+            document.getElementById('label-player-id').innerText = inputLabelText;
+            document.getElementById('player-id').placeholder = `Ketik ${inputLabelText} disini`;
+            document.getElementById('player-id').value = '';
+            document.getElementById('player-zone').value = '';
 
-        if (gameName === 'Mobile Legends') {
-            inputGrid.classList.add('has-zone'); mlZoneWrap.classList.remove('hidden');
-        } else {
-            inputGrid.classList.remove('has-zone'); mlZoneWrap.classList.add('hidden');
-        }
-        renderCatalog(gameName);
+            const inputGrid = document.getElementById('input-grid');
+            const mlZoneWrap = document.getElementById('ml-zone-wrap');
+
+            if (gameName === 'Mobile Legends') {
+                inputGrid.classList.add('has-zone'); 
+                mlZoneWrap.classList.remove('hidden');
+                document.body.classList.remove('theme-ff');
+                document.body.classList.add('theme-ml');
+            } else {
+                inputGrid.classList.remove('has-zone'); 
+                mlZoneWrap.classList.add('hidden');
+                document.body.classList.remove('theme-ml');
+                document.body.classList.add('theme-ff');
+            }
+            
+            renderCatalog(gameName);
+
+            dynamicBanner.classList.remove('fade-out');
+            dynamicSteps.classList.remove('fade-out');
+        }, 300);
     }
 
     function renderCatalog(gameName) {
@@ -776,7 +798,6 @@
 
     function sendToWhatsApp() {
         const totalStr = 'Rp ' + (currentState.itemPrice * currentState.qty).toLocaleString('id-ID');
-        
         const now = new Date();
         const options = { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' };
         const dateTimeString = now.toLocaleDateString('id-ID', options) + ' WIB';
